@@ -56,7 +56,7 @@ async def list_expense(start_date,end_date):
 
             cols = [d[0] for d in curr.description]
 
-            return [dict(zip(cols,row)) for row in curr.fetchall()]
+            return [dict(zip(cols,row)) for row in await curr.fetchall()]
     except Exception as e:
         return {"status":"error","message":f"error while listing the expense {str(e)}"}
 
