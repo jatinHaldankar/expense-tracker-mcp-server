@@ -48,11 +48,11 @@ async def add_expense(date,category,amount,subcategory="",note=""):
         
 
 @mcp.tool
-def list_expense(start_date,end_date):
+async def list_expense(start_date,end_date):
     """list the expense between the start date and the end date."""
     try:
-        with aiosqlite.connect(DB_PATH) as c:
-            curr = c.execute("SELECT * FROM expense WHERE date BETWEEN ? AND ?",(start_date,end_date))
+        async with aiosqlite.connect(DB_PATH) as c:
+            curr = await c.execute("SELECT * FROM expense WHERE date BETWEEN ? AND ?",(start_date,end_date))
 
             cols = [d[0] for d in curr.description]
 
